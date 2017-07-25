@@ -30,9 +30,15 @@ class Board extends Component {
         });
 
         this.socket.on('lost', (board) => { // you lost
-            console.log('lost');
             this.setState({board});
             this.setState({turn: "You lose"});
+            this.playAgain();
+
+        });
+
+        this.socket.on('draw', (board) => { // you lost
+            this.setState({board});
+            this.setState({turn: "draw"});
             this.playAgain();
 
         });
@@ -65,6 +71,25 @@ class Board extends Component {
         }
     };
 
+    checkDraw =(tempState)=>{
+        let flag = true;
+        for(let i in this.state.board){
+            for(let j in this.state.board[i]){
+                if(this.state.board[i][j] == ""){
+                    flag = false;
+                }
+            }
+        }
+        if(flag){//draw
+            this.socket.emit('draw', tempState);
+            this.turn = !this.user; // switch turns
+            this.setState({turn: "Draw"});
+            this.playAgain(); // show button
+            return true;
+
+        }
+        return false;
+    };
     checkWin = (i, j, tempState) => {
         this.rowsCounter[i]++;
         this.colCounter[j]++;
@@ -72,7 +97,7 @@ class Board extends Component {
             // top left diagonal
             this.formTopLeftDiagonalCounter++;
         }
-        else if ((i == 0 && j == 3) || (i == 1 && j == 2) || (i == 2 && j == 1) || (i == 3 && j == 0)) {
+        else if (i + j == 3) {
             // top right diagonal
             this.fromTopRightDiagonalCounter++;
         }
@@ -84,6 +109,9 @@ class Board extends Component {
             this.setState({turn: "You win"});
             this.playAgain(); // show button
             return true;
+        }
+        if(this.checkDraw(tempState)){
+            return true
         }
         return false;
 
@@ -140,7 +168,7 @@ class Board extends Component {
                 <div className="App">
                     <div className="container">
                         <h2>{this.state.turn}</h2>
-                        <button className="btn btn-success" onClick={this.startAnotherGame.bind(null)}>Play again</button>
+                        <button className="btn btn-success" onClick={this.startAnotherGame.bind(null)}>Rematch</button>
                         <table className=" card table-bordered table-responsive">
                             <tbody>
                             {tableBoard}

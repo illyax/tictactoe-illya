@@ -47,6 +47,10 @@ io.on('connection', (socket) => {
     socket.on('win', (board) => { // broadcast to second player that he lost
         socket.broadcast.emit('lost', board);
 
+    });
+
+    socket.on('draw', (board) => { // broadcast to second player that he lost
+        socket.broadcast.emit('draw', board);
 
     });
 
