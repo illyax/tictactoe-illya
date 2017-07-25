@@ -9,7 +9,7 @@ class Board extends Component {
         this.turn = 1;
         this.user = props.user;
         this.board = [["", "", "", ""], ["", "", "", ""], ["", "", "", ""], ["", "", "", ""]];
-        this.state = {board: this.board, turn: "Wait for opponents turn", playAgain : false};
+        this.state = {board: this.board, turn: "Wait for opponents turn", playAgain: false};
         this.rowsCounter = [0, 0, 0, 0];
         this.colCounter = [0, 0, 0, 0];
         this.formTopLeftDiagonalCounter = 0;
@@ -47,7 +47,7 @@ class Board extends Component {
             this.setState({board});
             this.resetCounters();
             this.setState({turn: "Wait for opponents turn"});
-            this.setState({playAgain:false});
+            this.setState({playAgain: false});
 
         });
     }
@@ -61,8 +61,8 @@ class Board extends Component {
             else {
                 tempState[i][j] = "o";
             }
-            this.setState({board:tempState});
-            if(!this.checkWin(i, j, tempState)){
+            this.setState({board: tempState});
+            if (!this.checkWin(i, j, tempState)) {
                 this.socket.emit('move', tempState); // send updated board to server which will send it to other user
                 this.turn = !this.user; // switch turns
                 this.setState({turn: "Wait for opponents turn"});
@@ -71,16 +71,16 @@ class Board extends Component {
         }
     };
 
-    checkDraw =(tempState)=>{
+    checkDraw = (tempState) => {
         let flag = true;
-        for(let i in this.state.board){
-            for(let j in this.state.board[i]){
-                if(this.state.board[i][j] == ""){
+        for (let i in this.state.board) {
+            for (let j in this.state.board[i]) {
+                if (this.state.board[i][j] == "") {
                     flag = false;
                 }
             }
         }
-        if(flag){//draw
+        if (flag) {//draw
             this.socket.emit('draw', tempState);
             this.turn = !this.user; // switch turns
             this.setState({turn: "Draw"});
@@ -110,19 +110,19 @@ class Board extends Component {
             this.playAgain(); // show button
             return true;
         }
-        if(this.checkDraw(tempState)){
+        if (this.checkDraw(tempState)) {
             return true
         }
         return false;
 
     };
 
-    playAgain = () =>{
-        this.setState({playAgain : true}); // show button
+    playAgain = () => {
+        this.setState({playAgain: true}); // show button
     };
 
-    startAnotherGame = () =>{
-        this.setState({playAgain:false});
+    startAnotherGame = () => {
+        this.setState({playAgain: false});
         this.turn = this.user;
         this.setState({turn: "Your turn"});
         this.resetCounters();
@@ -130,16 +130,17 @@ class Board extends Component {
 
     };
 
-    resetCounters = () =>{
+    resetCounters = () => {
         this.rowsCounter = [0, 0, 0, 0];
         this.colCounter = [0, 0, 0, 0];
         this.formTopLeftDiagonalCounter = 0;
         this.fromTopRightDiagonalCounter = 0;
         this.board = [["", "", "", ""], ["", "", "", ""], ["", "", "", ""], ["", "", "", ""]];
-        this.setState({board:this.board});
+        this.setState({board: this.board});
         console.log(this.board);
 
     };
+
     render() {
         // build table
         let tableBoard = this.state.board.map((row, index) => {
@@ -148,13 +149,21 @@ class Board extends Component {
                             onClick={this.handleClick.bind(null, index, colIndex)}>{this.state.board[index][colIndex]}</td>);
             });
             return (<tr key={index}>{cols}</tr>);
-
         });
-        if(!this.state.playAgain){
+        let btn = null;
+
+        if (this.state.playAgain) {
+            btn = <button className="btn btn-success" onClick={this.startAnotherGame.bind(null)}>Rematch</button>
+        }
+        else {
+            btn = null;
+        }
+
         return (
             <div className="App">
                 <div className="container">
                     <h2>{this.state.turn}</h2>
+                    {btn}
                     <table className=" card table-bordered table-responsive">
                         <tbody>
                         {tableBoard}
@@ -162,23 +171,9 @@ class Board extends Component {
                     </table>
                 </div>
             </div>
-        );}
-        else{
-            return (
-                <div className="App">
-                    <div className="container">
-                        <h2>{this.state.turn}</h2>
-                        <button className="btn btn-success" onClick={this.startAnotherGame.bind(null)}>Rematch</button>
-                        <table className=" card table-bordered table-responsive">
-                            <tbody>
-                            {tableBoard}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            );
-        }
+        );
     }
+
 
 }
 
