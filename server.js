@@ -22,6 +22,10 @@ app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
+app.get('/favicon', function (req, res) {
+    res.sendFile(path.join(__dirname, './public/favicon.ico'));
+});
+
 
 io.on('connection', (socket) => {
 
