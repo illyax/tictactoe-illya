@@ -63,6 +63,11 @@ io.on('connection', (socket) => {
 
 
     });
+    socket.on('message', (conversation) => { // start another game
+        socket.broadcast.emit('message', conversation);
+
+
+    });
 
     socket.on('disconnect', () => {
         users.splice(users.indexOf(socket.id), 1); // in case of disconnect

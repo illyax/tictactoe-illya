@@ -72,23 +72,19 @@ class Board extends Component {
     };
 
     checkDraw = (tempState) => {
-        let flag = true;
         for (let i in this.state.board) {
             for (let j in this.state.board[i]) {
                 if (this.state.board[i][j] == "") {
-                    flag = false;
+                    return false;
                 }
             }
         }
-        if (flag) {//draw
-            this.socket.emit('draw', tempState);
-            this.turn = !this.user; // switch turns
-            this.setState({turn: "Draw"});
-            this.playAgain(); // show button
-            return true;
+        this.socket.emit('draw', tempState);
+        this.turn = !this.user; // switch turns
+        this.setState({turn: "Draw"});
+        this.playAgain(); // show button
+        return true;
 
-        }
-        return false;
     };
     checkWin = (i, j, tempState) => {
         this.rowsCounter[i]++;
