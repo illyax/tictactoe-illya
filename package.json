@@ -25,5 +25,12 @@
     "express": "^4.15.3",
     "redux": "^3.7.2",
     "socket.io": "^2.0.3"
+  },
+  "keywords": [
+    "example",
+    "heroku"
+  ],
+  "engines": {
+    "node": "4.1.1"
   }
 }
