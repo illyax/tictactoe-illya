@@ -4,9 +4,6 @@ import logo from '../../public/toe.png';
 class Header extends Component {
     constructor(props){
         super(props);
-        if(props.user){
-            console.log(props.user);
-        }
 
     }
     render() {

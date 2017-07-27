@@ -5,13 +5,14 @@ import Board from './components/board';
 import io from 'socket.io-client';
 import React, {Component} from 'react';
 import wait from '../public/waiting.gif';
+import Chat from "./components/chat";
 
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {play: false , user:0};
-        this.socket = io('http://localhost:3000', {});
+        this.socket = io('https://tic-tac-toe-illya.herokuapp.com', {});
 
     }
     componentDidMount() {
@@ -40,8 +41,9 @@ class App extends Component {
         }
         else {
             return (<div>
-                <Header user = {this.state.user} />
+                <Header  />
                 <Board user = {this.state.user} socket = {this.socket}/>
+                <Chat />
             </div>);
         }
 

@@ -16,7 +16,7 @@ module.exports={
         new webpack.DefinePlugin({
             'process.env': {
                 'NODE_ENV': JSON.stringify('development'),
-                'API_HOST': JSON.stringify('http://localhost:3000')
+                'API_HOST': JSON.stringify('https://tic-tac-toe-illya.herokuapp.com')
             }
         })
     ],
