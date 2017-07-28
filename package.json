@@ -2,9 +2,11 @@
   "name": "tictactoe-illya",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
   "author": "",
   "license": "ISC",
@@ -25,13 +27,15 @@
     "express": "^4.15.3",
     "react-icons": "^2.2.5",
     "redux": "^3.7.2",
-    "socket.io": "^2.0.3"
+    "socket.io": "^2.0.3",
+    "react": "15.5.4",
+    "react-dom": "15.5.4"
   },
   "keywords": [
-    "example",
+    "tictactoe",
     "heroku"
   ],
   "engines": {
-    "node": "4.1.1"
+    "node": "6.10.3"
   }
 }
