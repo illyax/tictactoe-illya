@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "webpack-dev-server --hot --inline",
-    "postinstall": "webpack -p --config webpack.config.prod.js"
+    "build": "NODE_ENV=production webpack --config ./webpack.config.prod.js"
   },
   "author": "",
   "license": "ISC",
@@ -20,8 +20,6 @@
     "webpack-hot-middleware": "^2.18.2"
   },
   "dependencies": {
-    "style-loader": "^0.18.2",
-    "file-loader": "^0.11.2",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
     "babel-preset-react": "^6.24.1",
