@@ -12,7 +12,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {play: false , user:0};
-        this.socket = io('http://localhost:3000', {});
+        this.socket = io('https://tic-tac-toe-illya.herokuapp.com/', {});
 
     }
     componentDidMount() {

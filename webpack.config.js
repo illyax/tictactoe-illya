@@ -20,7 +20,7 @@ module.exports={
             },
             'process.prod': {
                 'NODE_ENV': JSON.stringify('production'),
-                'API_HOST': JSON.stringify('https://tic-tac-toe-illya.herokuapp.com:3000')
+                'API_HOST': JSON.stringify('https://tic-tac-toe-illya.herokuapp.com/')
             }
 
         })

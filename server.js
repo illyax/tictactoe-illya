@@ -18,13 +18,13 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
-app.get('/favicon', function (req, res) {
-    res.sendFile(path.join(__dirname, './public/favicon.ico'));
-});
+
 
 
 io.on('connection', (socket) => {
