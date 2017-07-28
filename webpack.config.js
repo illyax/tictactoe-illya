@@ -42,7 +42,6 @@ module.exports={
             { test: /\.(otf|eot|ttf)$/, loader: "file?prefix=font/" },
             {
                 test: /\.html$/,
-                exclude: /node_modules/,
                 loader: 'html-loader'
             }, {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -52,12 +51,10 @@ module.exports={
                 loader: "json-loader"
             }, {
                 test: /\.png$/,
-                exclude: /node_modules/,
                 loader: 'file-loader?name=images/[name].[ext]'
             },
             {
                 test: /\.gif$/,
-                exclude: /node_modules/,
                 loader: 'file-loader?name=images/[name].[ext]'
             }
 
