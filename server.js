@@ -1,26 +1,27 @@
-const config = require('./webpack.config.js');
-
-const webpack = require('webpack');
 
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const path = require('path');
-const compiler = webpack(config);
+
 
 let users = [];
 
-app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: true,
-    publicPath: config.output.publicPath
-}));
+if(process.env.NODE_ENV !== 'production') {
+    const webpackDevMiddleware = require('webpack-dev-middleware');
+    const webpackHotMiddleware = require('webpack-hot-middleware');
+    const webpack = require('webpack');
+    const config = require('./webpack.config');
+    const compiler = webpack(config);
 
-app.use(require('webpack-hot-middleware')(compiler));
+    app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
+    app.use(webpackHotMiddleware(compiler));
+}
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('*', function (req, res) {
+app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
 

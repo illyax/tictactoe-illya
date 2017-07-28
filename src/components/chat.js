@@ -2,8 +2,9 @@
  * Created by illya on 26/07/2017.
  */
 import React, {Component} from 'react';
-import Faclose from 'react-icons/lib/fa/close'
-import TiMessage from 'react-icons/lib/ti/message'
+import Faclose from 'react-icons/lib/fa/close';
+import TiMessage from 'react-icons/lib/ti/message';
+
 
 export default class Chat extends Component {
 

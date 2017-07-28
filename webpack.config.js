@@ -4,23 +4,25 @@ const webpack = require('webpack');
 
 module.exports={
     entry:[
-        'webpack-hot-middleware/client?reload=true',
         './src/index'],
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'public')
+        path: path.resolve(__dirname, 'public'),
+        publicPath: '/',
+    },
+    devServer: {
+        contentBase: './public',
+        hot: true
     },
     watch: true,
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         new webpack.DefinePlugin({
             'process.env': {
                 'NODE_ENV': JSON.stringify('development'),
                 'API_HOST': JSON.stringify('http://localhost:3000')
-            },
-            'process.prod': {
-                'NODE_ENV': JSON.stringify('production'),
-                'API_HOST': JSON.stringify('https://tic-tac-toe-illya.herokuapp.com/')
             }
 
         })
@@ -32,7 +34,7 @@ module.exports={
                 exclude:/node_modules/,
                 loader:'babel-loader',
                 query:{
-                    presets:['react','es2016','stage-1']
+                    presets:['react','es2015','stage-1']
                 }
             },
             {test: /\.jsx$/, include: path.join(__dirname, 'src'), loaders: ['babel-loader']},
