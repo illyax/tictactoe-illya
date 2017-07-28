@@ -83,6 +83,8 @@ td:hover {
     bottom: 1px;
     right: 5%;
     width: 20%;
+    background-color: #66afe9;
+    font-size: 20px;
 }
 
 .chatBox {
@@ -112,10 +114,6 @@ td:hover {
     transition: 0.3s;
 }
 
-.btn-info {
-    background-color: #66afe9;
-}
-
 .close {
     right: 1px;
     margin-right: 5px;
@@ -143,7 +141,7 @@ td:hover {
 
 .yourMessage {
     background-color: #66afe9;
-    margin-left: 3px;
+    margin: 3px;
     border-radius: 10px;
     margin-top: 10px;
     min-height: 30px;
@@ -151,12 +149,13 @@ td:hover {
     font-size: 20px;
     display: inline-block;
     position: relative;
+    color: white;
 
 }
 
 .opponentMessage {
     background-color: lightgray;
-    margin-right: 3px;
+    margin: 3px;
     border-radius: 10px;
     margin-top: 10px;
     min-height: 30px;
@@ -166,9 +165,24 @@ td:hover {
     position: relative;
 }
 
-.conversation {
-    height: 200px;
+.conversation{
+    height: 300px;
     overflow-y: scroll;
 }
+.alertSign{
+    margin-left: 10px;
+    position: relative;
+    color: red;
+    display: inline-block;
+    animation: alert infinite 0.5s;
+
+}
+
+@keyframes alert {
+    50%   { top:0px;}
+    50%  {top:2px;}
+}
+
+
 
 
